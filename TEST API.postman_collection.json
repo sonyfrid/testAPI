@@ -1,0 +1,3073 @@
+{
+	"info": {
+		"_postman_id": "cbc06efa-237a-4708-9ce7-d585459c1f43",
+		"name": "TEST API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28909872"
+	},
+	"item": [
+		{
+			"name": "Setup",
+			"item": [
+				{
+					"name": "Set_Schemas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let CompanyList = {",
+									"    \"type\": \"object\",",
+									"    \"properties\": {",
+									"        \"data\": {",
+									"            \"type\": \"array\",",
+									"            \"items\":",
+									"            {",
+									"                \"type\": \"object\",",
+									"                \"properties\": {",
+									"                    \"company_id\": {",
+									"                        \"type\": \"integer\"",
+									"                    },",
+									"                    \"company_name\": {",
+									"                        \"type\": \"string\"",
+									"                    },",
+									"                    \"company_address\": {",
+									"                        \"type\": \"string\"",
+									"                    },",
+									"                    \"company_status\": {",
+									"                        \"type\": \"string\",",
+									"                        \"enum\": [\"ACTIVE\", \"CLOSED\", \"BANKRUPT\"]",
+									"                    },",
+									"                    \"description\": {",
+									"                        \"type\": \"string\"",
+									"                    },",
+									"                    \"description_lang\": {",
+									"                        \"type\": \"array\",",
+									"                        \"items\":",
+									"                        {",
+									"                            \"type\": \"object\",",
+									"                            \"properties\": {",
+									"                                \"translation_lang\": {",
+									"                                    \"type\": \"string\"",
+									"                                },",
+									"                                \"translation\": {",
+									"                                    \"type\": \"string\"",
+									"                                }",
+									"                            },",
+									"                            \"required\": [",
+									"                                \"translation_lang\",",
+									"                                \"translation\"",
+									"                            ]",
+									"                        }",
+									"",
+									"                    }",
+									"                },",
+									"                \"required\": [",
+									"                    \"company_id\",",
+									"                    \"company_name\",",
+									"                    \"company_address\",",
+									"                    \"company_status\"",
+									"                ]",
+									"            }",
+									"",
+									"        },",
+									"        \"meta\": {",
+									"            \"type\": \"object\",",
+									"            \"properties\": {",
+									"                \"limit\": {",
+									"                    \"type\": \"integer\"",
+									"                },",
+									"                \"offset\": {",
+									"                    \"type\": \"integer\"",
+									"                },",
+									"                \"total\": {",
+									"                    \"type\": \"integer\"",
+									"                }",
+									"            },",
+									"            \"required\": [",
+									"                \"total\"",
+									"            ]",
+									"        }",
+									"    },",
+									"    \"required\": [",
+									"        \"data\",",
+									"        \"meta\"",
+									"    ]",
+									"};",
+									"",
+									"let Company = {",
+									"    \"type\": \"object\",",
+									"    \"properties\": {",
+									"        \"company_id\": {",
+									"            \"type\": \"integer\"",
+									"        },",
+									"        \"company_name\": {",
+									"            \"type\": \"string\"",
+									"        },",
+									"        \"company_address\": {",
+									"            \"type\": \"string\"",
+									"        },",
+									"        \"company_status\": {",
+									"            \"type\": \"string\",",
+									"            \"enum\": [",
+									"                \"ACTIVE\",",
+									"                \"BANKRUPT\",",
+									"                \"CLOSED\"",
+									"            ]",
+									"        },",
+									"        \"description\": {",
+									"            \"type\": \"string\"",
+									"        },",
+									"        \"description_lang\": {",
+									"            \"type\": \"array\",",
+									"            \"items\":",
+									"            {",
+									"                \"type\": \"object\",",
+									"                \"properties\": {",
+									"                    \"translation_lang\": {",
+									"                        \"type\": \"string\",",
+									"                        \"enum\": [",
+									"                            \"EN\",",
+									"                            \"RU\",",
+									"                            \"PL\",",
+									"                            \"UA\"",
+									"                        ]",
+									"                    },",
+									"                    \"translation\": {",
+									"                        \"type\": \"string\"",
+									"                    }",
+									"                },",
+									"                \"required\": [",
+									"                    \"translation_lang\",",
+									"                    \"translation\"",
+									"                ]",
+									"            }",
+									"",
+									"        }",
+									"    },",
+									"    \"required\": [",
+									"        \"company_id\",",
+									"        \"company_name\",",
+									"        \"company_address\",",
+									"        \"company_status\",",
+									"    ]",
+									"};",
+									"",
+									"let UsersList = {",
+									"    \"type\": \"object\",",
+									"    \"properties\": {",
+									"        \"meta\": {",
+									"            \"type\": \"object\",",
+									"            \"properties\": {",
+									"                \"limit\": {",
+									"                    \"type\": \"integer\"",
+									"                },",
+									"                \"offset\": {",
+									"                    \"type\": \"integer\"",
+									"                },",
+									"                \"total\": {",
+									"                    \"type\": \"integer\"",
+									"                }",
+									"            },",
+									"            \"required\": [",
+									"                \"total\"",
+									"            ]",
+									"        },",
+									"        \"data\": {",
+									"            \"type\": \"array\",",
+									"            \"items\":",
+									"            {",
+									"                \"type\": \"object\",",
+									"                \"properties\": {",
+									"                    \"first_name\": {",
+									"                        \"type\": [\"string\", \"null\"]",
+									"                    },",
+									"                    \"last_name\": {",
+									"                        \"type\": \"string\"",
+									"                    },",
+									"                    \"company_id\": {",
+									"                        \"type\": [\"integer\", \"null\"]",
+									"                    },",
+									"                    \"user_id\": {",
+									"                        \"type\": \"integer\"",
+									"                    }",
+									"                },",
+									"                \"required\": [",
+									"                    \"last_name\",",
+									"                    \"user_id\"",
+									"                ]",
+									"            }",
+									"",
+									"        }",
+									"    },",
+									"    \"required\": [",
+									"        \"meta\",",
+									"        \"data\"",
+									"    ]",
+									"};",
+									"",
+									"",
+									"let ResponseUser = {",
+									"    \"type\": \"object\",",
+									"    \"properties\": {",
+									"        \"first_name\": {",
+									"            \"type\": \"string\",",
+									"        },",
+									"        \"last_name\": {",
+									"            \"type\": \"string\",",
+									"        },",
+									"        \"company_id\": {",
+									"            \"type\": \"integer\",",
+									"        },",
+									"        \"user_id\": {",
+									"            \"type\": \"integer\",",
+									"        }",
+									"    },",
+									"    \"required\": [",
+									"        \"last_name\",",
+									"        \"user_id\"",
+									"    ]",
+									"};",
+									"",
+									"let HTTPValidationError = {",
+									"    \"type\": \"object\",",
+									"    \"properties\": {",
+									"        \"detail\": {",
+									"            \"type\": \"array\",",
+									"            \"items\":",
+									"            {",
+									"                \"type\": \"object\",",
+									"                \"properties\": {",
+									"                    \"loc\": {",
+									"                        \"type\": \"array\",",
+									"                        \"items\": {",
+									"                            \"type\": [",
+									"                                \"string\",",
+									"                                \"integer\"",
+									"                            ]",
+									"                        }",
+									"                    },",
+									"                    \"msg\": {",
+									"                        \"type\": \"string\"",
+									"                    }",
+									"                },",
+									"                \"required\": [",
+									"                    \"loc\",",
+									"                    \"msg\",",
+									"                    \"type\"",
+									"                ]",
+									"            }",
+									"",
+									"        }",
+									"    },",
+									"    \"required\": [",
+									"        \"detail\"",
+									"    ]",
+									"};",
+									"",
+									"",
+									"pm.environment.set(\"CompanyList\", JSON.stringify(CompanyList));",
+									"pm.environment.set(\"Company\", JSON.stringify(Company));",
+									"pm.environment.set(\"UsersList\", JSON.stringify(UsersList));",
+									"pm.environment.set(\"ResponseUser\", JSON.stringify(ResponseUser));",
+									"pm.environment.set(\"HTTPValidationError\", JSON.stringify(HTTPValidationError));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "HEAD",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}",
+							"host": [
+								"{{baseUrl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "companies",
+			"item": [
+				{
+					"name": "CompaniesDefaultRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Len of JSON with default limit\", function() { //количество компаний, 3 компании должно быть\r",
+									"    let companiesCount = pm.response.json().data.length;\r",
+									"    pm.expect(companiesCount).to.eql(3);\r",
+									"});\r",
+									"let schema = JSON.parse(pm.environment.get(\"CompanyList\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"pm.test('Schema is valid', function() {\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"//визуализация\r",
+									"let template = `\r",
+									"    <table bgcolor=\"paleturquoise\">\r",
+									"        <tr>\r",
+									"            <th>company_id</th>\r",
+									"            <th>company_name</th>\r",
+									"            <th>company_address</th>\r",
+									"            <th>company_status</th>\r",
+									"        </tr>\r",
+									"\r",
+									"        {{#each response}}\r",
+									"            <tr>\r",
+									"                <td>{{company_id}}</td>\r",
+									"                <td>{{company_name}}</td>\r",
+									"                <td>{{company_address}}</td>\r",
+									"                <td>{{company_status}}</td>\r",
+									"            </tr>\r",
+									"        {{/each}}\r",
+									"    </table>\r",
+									"`;\r",
+									"// Set visualizer\r",
+									"pm.visualizer.set(template, {\r",
+									"    response: pm.response.json().data\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompaniesWithoutSSL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 301\", function () {\r",
+									"    pm.response.to.have.status(301);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Request by http\", function() {\r",
+									"pm.expect(pm.request.url.protocol).to.eql(\"http\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://send-request.me/api/companies/",
+							"protocol": "http",
+							"host": [
+								"send-request",
+								"me"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompaniesDefaultRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let offset = pm.variables.get(\"offset\");\r",
+									"pm.test(\"Verify offset\", function () {\r",
+									"    pm.expect(pm.response.json().data[0].company_id).to.eql(offset || 3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Len of JSON with default limit\", function() { //количество компаний 5\r",
+									"    let lengthData = pm.response.json().data.length;\r",
+									"    pm.expect(lengthData).to.eql(5);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest(\"https://send-request.me/api/companies\", function (err, response) {\r",
+									"    pm.variables.set(\"offset\", response.json().data[2].company_id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/?limit=5&offset=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "offset",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompaniesFilterStatusActive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"CompanyList\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify comp status\", function () {\r",
+									"    for (let company of pm.response.json().data) {\r",
+									"        pm.expect(company.company_status).to.be.eql(\"ACTIVE\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/?status=ACTIVE",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "ACTIVE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompaniesFilterStatusClosed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"CompanyList\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify comp status\", function () {\r",
+									"    for (let company of pm.response.json().data) {\r",
+									"        pm.expect(company.company_status).to.be.eql(\"CLOSED\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/?status=CLOSED",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "CLOSED"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompaniesFilterStatusBankrupt",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"CompanyList\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify comp status\", function () {\r",
+									"    for (let company of pm.response.json().data) {\r",
+									"        pm.expect(company.company_status).to.be.eql(\"BANKRUPT\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/?status=BANKRUPT",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "BANKRUPT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompaniesWithInvQueryStatus",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let schema = JSON.parse(pm.environment.get(\"HTTPValidationError\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/?status=ABC",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "ABC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompaniesWithInvQueryLimit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let schema = JSON.parse(pm.environment.get(\"CompanyList\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/?limit=-1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompaniesWithStrQueryLimit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let schema = JSON.parse(pm.environment.get(\"HTTPValidationError\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/?limit=ABC",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "ABC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompaniesWithInvQueryOffset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Len of JSON with default limit\", function() { //количество компаний 5\r",
+									"    let lengthData = pm.response.json().data.length;\r",
+									"    pm.expect(lengthData).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify offset\", function() {\r",
+									"    pm.expect(pm.response.json().data[0].company_id).to.eql(1)\r",
+									"})\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"CompanyList\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function() {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest(\"https://send-request.me/api/companies\", function (err, response) {\r",
+									"    pm.variables.set(\"offset\", response.json().data[0].company_id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/?offset=-1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompaniesWithInvQueryLimit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let schema = JSON.parse(pm.environment.get(\"HTTPValidationError\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function() {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/?offset=ABCB",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "ABCB"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompanyById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response when correct Accept-languege\", function() {\r",
+									"    pm.expect(pm.response.json()).to.have.any.keys(\"description\", \"description_lang\")\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().description_lang){\r",
+									"    pm.test(\"description_lang === EN\", function() {\r",
+									"        pm.expect(pm.response.json().description_lang[0].translation_lang).to.eql(\"EN\")}\r",
+									"    )};\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"Company\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompanyByNonexId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompanyByIdLangRU",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response when correct Accept-languege\", function() {\r",
+									"    pm.expect(pm.response.json()).to.have.any.keys(\"description\", \"description_lang\")\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().description_lang){\r",
+									"    pm.test(\"description_lang === EN\", function() {\r",
+									"        pm.expect(pm.response.json().description_lang[0].translation_lang).to.eql(\"EN\")}\r",
+									"    )};\r",
+									"let schema = JSON.parse(pm.environment.get(\"Company\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "RU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompanyByIdInvLang",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response when correct Accept-languege\", function() {\r",
+									"    pm.expect(pm.response.json()).to.have.any.keys(\"description\", \"description_lang\")\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().description_lang){\r",
+									"    pm.test(\"description_lang === EN\", function() {\r",
+									"        pm.expect(pm.response.json().description_lang[0].translation_lang).to.eql(\"EN\")}\r",
+									"    )};\r",
+									"\r",
+									"    let schema = JSON.parse(pm.environment.get(\"Company\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "AM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "UsersWithLimit&Offset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Len of JSON with default limit\", function() { //количество компаний 5\r",
+									"    let lengthData = pm.response.json().data.length;\r",
+									"    pm.expect(lengthData).to.eql(10);\r",
+									"});\r",
+									"\r",
+									"let offset = pm.variables.get(\"offset\");\r",
+									"pm.test(\"Verify offset\", function() {\r",
+									"    pm.expect(pm.response.json().data[0].user_id).to.eql(offset && 70)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest(\"https://send-request.me/api/users?limit=10\", function (err, response) {\r",
+									"    pm.variables.set(\"offset\", response.json().data[5].user_id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/?limit=10&offset=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UsersWithInvQueryLimit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let schema = JSON.parse(pm.environment.get(\"HTTPValidationError\"));\r",
+									"\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/?limit=-1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UsersWithStrLimit&Offset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let schema = JSON.parse(pm.environment.get(\"HTTPValidationError\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/?limit=hoho&offset=meme",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "hoho"
+								},
+								{
+									"key": "offset",
+									"value": "meme"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UsersWithoutSSL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 301\", function () {\r",
+									"    pm.response.to.have.status(301);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Request by http\", function() {\r",
+									"pm.expect(pm.request.url.protocol).to.eql(\"http\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://send-request.me/api/users",
+							"protocol": "http",
+							"host": [
+								"send-request",
+								"me"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserCreated",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"first_name\", pm.response.json().first_name);\r",
+									"pm.collectionVariables.set(\"last_name\", pm.response.json().last_name);\r",
+									"pm.collectionVariables.set(\"company_id\", pm.response.json().company_id);\r",
+									"pm.collectionVariables.set(\"user_id\", pm.response.json().user_id);\r",
+									"//установка переменных для дальнейших проверок\r",
+									"pm.test(\"Status code be success\", function () {\r",
+									"    pm.response.to.be.success;\r",
+									"});\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"ResponseUser\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function() { //проверка на JSON schema\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"postman.setNextRequest(\"IssuesGetUserById\") //для правильного прогона коллекции\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"first_name\": \"Scrooge\",\r\n  \"last_name\": \"Mqduck\",\r\n  \"company_id\": 2\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserCreateAbsentCompany",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"first_name\": \"Scrooge\",\r\n  \"last_name\": \"Mqduck\",\r\n  \"company_id\": 87\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserNegativeCreate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"HTTPValidationError\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function() {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"first_name\": null,\r\n  \"last_name\": \"Mqduck\",\r\n  \"company_id\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserCreatedWithClosedCompany",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"first_name\": \"Soso\",\r\n  \"last_name\": \"Pablo\",\r\n  \"company_id\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserCreatedWithoutRequiredKeys",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"HTTPValidationError\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function() {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"first_name\": \"Soso\",\r\n  \"company_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCreatedUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let first_name = pm.collectionVariables.get(\"first_name\");\r",
+									"let last_name = pm.collectionVariables.get(\"last_name\");\r",
+									"let company_id = pm.collectionVariables.get(\"company_id\");\r",
+									"let user_id = pm.collectionVariables.get(\"user_id\");\r",
+									"\r",
+									"\r",
+									"let jsonData = pm.response.json();  \r",
+									"\r",
+									"pm.test(\"Verify enums\", function(){\r",
+									"    pm.expect(jsonData.first_name).to.be.eql(first_name);\r",
+									"    pm.expect(jsonData.last_name).to.be.eql(last_name);\r",
+									"    pm.expect(jsonData.company_id).to.be.eql(company_id);\r",
+									"    pm.expect(jsonData.user_id).to.be.eql(user_id);\r",
+									"    \r",
+									"}); //проверка значений запрашиваемого пользователя с созданным в \"UserCreated\"\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"ResponseUser\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{user_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUncreatedUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/204700",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"204700"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserUpdate",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"first_name\", \"Blez\");\r",
+									"pm.collectionVariables.set(\"last_name\", \"Pascal\");\r",
+									"pm.collectionVariables.set(\"company_id\", 2);\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let first_name = pm.collectionVariables.get(\"first_name\");\r",
+									"let last_name = pm.collectionVariables.get(\"last_name\");\r",
+									"let company_id = pm.collectionVariables.get(\"company_id\");\r",
+									"let user_id = pm.collectionVariables.get(\"user_id\"); //\r",
+									"\r",
+									"let jsonData = pm.response.json(); \r",
+									"\r",
+									"pm.test(\"Verify enums\", function(){\r",
+									"    pm.expect(jsonData.first_name).to.be.eql(first_name);\r",
+									"    pm.expect(jsonData.last_name).to.be.eql(last_name);\r",
+									"    pm.expect(jsonData.company_id).to.be.eql(company_id);\r",
+									"    pm.expect(jsonData.user_id).to.be.eql(user_id);\r",
+									"});\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"ResponseUser\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function() {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"first_name\": \"{{first_name}}\",\r\n  \"last_name\": \"{{last_name}}\",\r\n  \"company_id\": \"{{company_id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{user_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserUpdateOnNullCompany",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"first_name\": \"Blez\",\r\n  \"last_name\": \"Pascal\",\r\n  \"company_id\": 88\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{user_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NullUserUpdate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"first_name\": \"Block\",\r\n  \"last_name\": \"Ivanov\",\r\n  \"company_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/10000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"10000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCreatedUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response body is object\", function(){\r",
+									"    pm.expect(pm.response.json()).to.be.a(\"object\");\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.clear();\r",
+									"\r",
+									"pm.test(\"Status code is success\", function () {\r",
+									"    pm.response.to.be.success;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{user_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUncreatedUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/300000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"300000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "issues",
+			"item": [
+				{
+					"name": "IssuesCompanyesWithQuery",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"CompanyList\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function() {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Len of JSON with default limit\", function() { //количество компаний 5\r",
+									"    let lengthData = pm.response.json().data.length;\r",
+									"    pm.expect(lengthData).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify offset\", function() {\r",
+									"    pm.expect(pm.response.json().data[0].company_id).to.eql(3)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest(\"https://send-request.me/api/companies\", function (err, response) {\r",
+									"    pm.variables.set(\"offset\", response.json().data[1].company_id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/issues/companies?limit=1&offset =1&status =ACTIVE",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"issues",
+								"companies"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset ",
+									"value": "1"
+								},
+								{
+									"key": "status ",
+									"value": "ACTIVE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IssuesCompanyByID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response when correct Accept-languege\", function() {\r",
+									"    pm.expect(pm.response.json()).to.have.any.keys(\"description\", \"description_lang\")\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().description_lang){\r",
+									"    pm.test(\"description_lang === EN\", function() {\r",
+									"        pm.expect(pm.response.json().description_lang[0].translation_lang).to.eql(\"EN\")}\r",
+									"    )};\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"Company\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"postman.setNextRequest(\"IssuesUserCreated\")\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/issues/companies/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"issues",
+								"companies",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IssuesGetUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setNextRequest(\"UserCreateAbsentCompany\")\r",
+									"\r",
+									"let first_name = pm.collectionVariables.get(\"first_name\");\r",
+									"let last_name = pm.collectionVariables.get(\"last_name\");\r",
+									"let company_id = pm.collectionVariables.get(\"company_id\");\r",
+									"let user_id = pm.collectionVariables.get(\"user_id\");\r",
+									"let jsonData = pm.response.json();  \r",
+									"\r",
+									"pm.test(\"Verify enums\", function (){\r",
+									"    pm.expect(jsonData.first_name).to.be.eql(first_name);\r",
+									"    pm.expect(jsonData.last_name).to.be.eql(last_name);\r",
+									"    pm.expect(jsonData.company_id).to.be.eql(company_id);\r",
+									"    pm.expect(jsonData.user_id).to.be.eql(user_id);\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"ResponseUser\"));\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/issues/users/{{user_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"issues",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IssuesUserCreated",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"first_name\", \"Pifagor\");\r",
+									"pm.collectionVariables.set(\"last_name\", \"Samosskiy\");\r",
+									"pm.collectionVariables.set(\"company_id\", \"3\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"let first_name = pm.collectionVariables.get(\"first_name\");\r",
+									"let last_name = pm.collectionVariables.get(\"last_name\");\r",
+									"let company_id = pm.collectionVariables.get(\"company_id\");\r",
+									"let user_id = pm.collectionVariables.get(\"user_id\");\r",
+									"\r",
+									"\r",
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Verify enums\", function(){\r",
+									"    pm.expect(jsonData.first_name).to.be.eql(first_name);\r",
+									"    pm.expect(jsonData.last_name).to.be.eql(last_name);\r",
+									"    pm.expect(jsonData.company_id).to.be.eql(company_id);\r",
+									"});\r",
+									"\r",
+									"let schema = JSON.parse(pm.environment.get(\"ResponseUser\"));\r",
+									"pm.test('Check JSON schema', function() {\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.clear();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"first_name\": \"{{first_name}}\",\r\n  \"last_name\": \"{{last_name}}\",\r\n  \"company_id\": \"{{company_id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/issues/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"issues",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "СompanyIdLength",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is success\", function () {\r",
+									"    pm.response.to.be.success;\r",
+									"});\r",
+									"\r",
+									"// Получаем массив объектов \"fieldName\"\r",
+									"let dataArray = response.data;\r",
+									"\r",
+									"// Устанавливаем минимальную и максимальную длины\r",
+									"let minLength = 1;\r",
+									"let maxLength = 5;\r",
+									"\r",
+									"// Проходимс по каждому элементу массива\r",
+									"dataArray.forEach((item)=> {\r",
+									"    // Проверяем, что \"company\" существует и его длина находится в заданном диапазоне\r",
+									"    if (item.company_id && item.company_id.toString().length >= minLength && item.company_id.toString().length <= maxLength) {\r",
+									"        // Если условие выполняется, тест проходит\r",
+									"        pm.test(\"Длина 'company' находится в диапазоне от 1 до 3\", function () {\r",
+									"            pm.expect(true).to.be.true;\r",
+									"        });\r",
+									"    } else {\r",
+									"        // Если условие не выполняется, тест не проходит\r",
+									"        pm.test(\"Длина 'company' не находится в диапазоне от 1 до 3\", function () {\r",
+									"            pm.expect(true).to.be.false;\r",
+									"        });\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CheckComplianceWithSchema",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let schema = JSON.parse(pm.environment.get(\"CompanyList\"))\r",
+									"pm.test(\"Check JSONschema\", function(){\r",
+									"pm.response.to.have.jsonSchema(schema)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Status code is success\", function () {\r",
+									"    pm.response.to.be.success;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EmbeddedSingleQuote",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"// Получаем ответ от сервера\r",
+									"let response = pm.response.json();\r",
+									"// Функция для проверки наличия одинарных кавычек в строке\r",
+									"function containsSingleQuote(value) {\r",
+									"    return /'/.test(value);\r",
+									"}\r",
+									"// Проходимся по каждому полю, которое нужно проверить\r",
+									"pm.test(\"Проверка наличия одинарных кавычек в значениях\", function () {\r",
+									"    let hasSingleQuote = false;\r",
+									"    // Проверяем каждое поле в JSON\r",
+									"    for (let key in response) {\r",
+									"        if (typeof response[key] === 'object') { // Если это объект, проверяем каждое значение внутри\r",
+									"            for (let nestedKey in response[key]) {\r",
+									"                if (typeof response[key][nestedKey] === 'string') {\r",
+									"                    if (containsSingleQuote(response[key][nestedKey])) { //\r",
+									"                        hasSingleQuote = true;\r",
+									"                        break;\r",
+									"                    }\r",
+									"                }\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"    pm.expect(hasSingleQuote).to.equal(false, \"Одинарные кавычки обнаружены в значениях\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is success\", function () {\r",
+									"    pm.response.to.be.success;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/companies/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"companies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Create_user",
+					"item": [
+						{
+							"name": "С-01",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"pm.environment.set(\"token\", jsonData.token); //set variable\r",
+											"\r",
+											"\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"pm.test(\"Token received\", function(){\r",
+											"    pm.expect(pm.response.json().token).to.be.a(\"string\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"sia\",\r\n  \"password\": \"qwerty12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/authorize",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"authorize"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "{{$randomInt}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "С-02",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"pm.test(\"Token received\", function(){\r",
+											"    pm.expect(pm.response.json().token).to.be.a(\"string\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"olovovo\",\r\n  \"password\": \"qwerty12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/authorize",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"authorize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "С-03",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response when correct key\", function() {\r",
+											"    pm.expect(pm.response.json()).to.have.key(\"detail\")\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"o\",\r\n  \"password\": \"qwerty12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/authorize",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"authorize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "С-04",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response when correct key\", function() {\r",
+											"    pm.expect(pm.response.json()).to.have.key(\"detail\")\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"ol\",\r\n  \"password\": \"qwerty12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/authorize",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"authorize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "С-05",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response when correct key\", function() {\r",
+											"    pm.expect(pm.response.json()).to.have.key(\"detail\")\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"\",\r\n  \"password\": \"qwerty12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/authorize",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"authorize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "С-06",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"qwerty12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/authorize",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"authorize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "С-07",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"pm.test(\"Status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response when correct key\", function() {\r",
+											"    pm.expect(pm.response.json()).to.have.key(\"detail\")\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"olovo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/authorize",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"authorize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "С-08",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response when correct key\", function() {\r",
+											"    pm.expect(pm.response.json()).to.have.key(\"detail\")\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"olovo\",\r\n  \"password\": \"q\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/authorize",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"authorize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "С-09",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response when correct key\", function() {\r",
+											"    pm.expect(pm.response.json()).to.have.key(\"detail\")\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"olo\",\r\n  \"password\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/authorize",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"authorize"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "get_Info_about_user",
+					"item": [
+						{
+							"name": "С-10",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response when correct key\", function() {\r",
+											"    pm.expect(pm.response.json()).to.have.any.keys(\"user_name\" && \"email_address\" && \"valid_till\")\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "x-token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"olo\",\r\n  \"password\": \"qwerty12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "С-11",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response when correct key\", function() {\r",
+											"    pm.expect(pm.response.json()).to.have.key(\"detail\")\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Token received\", function(){\r",
+											"    pm.expect(pm.response.json().token).to.eql(pm.environment.get(\"token\"))\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "10b7491dfa75fba3d1301ec8c709f1b9",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "x-token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"sia\",\r\n  \"password\": \"qwerty12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "С-12",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response when correct key\", function() {\r",
+											"    pm.expect(pm.response.json()).to.have.key(\"detail\")\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "x-token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"olo\",\r\n  \"password\": \"qwerty12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "С-13",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json(); // in \"check JSON value\" cut\r",
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"// Проверка значения заголовка \"Content-Type\"\r",
+											"pm.test(\"Проверка значения заголовка Content-Type\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response when correct key\", function() {\r",
+											"    pm.expect(pm.response.json()).to.have.key(\"detail\")\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"sia\",\r\n  \"password\": \"qwerty12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "apikey",
+						"apikey": [
+							{
+								"key": "value",
+								"value": "068a8094d0338ac281d0c0a4a58fd22d",
+								"type": "string"
+							},
+							{
+								"key": "in",
+								"value": "header",
+								"type": "string"
+							},
+							{
+								"key": "key",
+								"value": "x-token",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Response time is less than 500ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(500);",
+					"});",
+					"",
+					"if (pm.request.url.protocol === \"https\" & pm.request.method != \"HEAD\") {",
+					"    pm.test(\"Headers is valid\", () => {",
+					"        pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+					"        pm.expect(pm.response.headers.get('Connection')).to.eql('keep-alive')",
+					"    });",
+					"}"
+				]
+			}
+		}
+	]
+}
