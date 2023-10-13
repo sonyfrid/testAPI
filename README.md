@@ -8,9 +8,9 @@ How to start:
 API testing with swagger at
 https://send-request.me/
 
-<h4>1. For ease of testing, JSON schemas are pre-written here.</h4> 
-
+<h3>1. For ease of testing, JSON schemas are pre-written here.</h3> 
+<br>
 <img align="center" alt="Coding" src="https://github.com/sonyfrid/image/blob/main/1.png?raw=true" style="width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
-<h4>2. Here we see an endpoint check with query parameters. Below is a visualization of the response body.</h4> 
+<h3>2. Here we see an endpoint check with query parameters. Below is a visualization of the response body.</h3> <br>
 <img align="center" alt="Coding" src="https://github.com/sonyfrid/image/blob/main/3.png?raw=true" style="width: 100%; display: inline-block;" data-target="animated-image.originalImage">
