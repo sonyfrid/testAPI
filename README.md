@@ -31,7 +31,7 @@ Below is a visualization of the response body.</h3>
 <h3>7. Example of tests checking the length of the "company_id" value.</h3>>
 <img align="center" alt="Coding" src="https://github.com/sonyfrid/image/blob/main/8.png?raw=true" style="width: 100%; display: inline-block;" data-target="animated-image.originalImage"><br>
 
-<h3>8. Collection run report from Newman and allure .</h3>
+<h3>8. Collection run report from Newman and Allure .</h3>
 <img align="center" alt="Coding" src="https://github.com/sonyfrid/image/blob/main/Monosnap+Newman+Summary+Report+-+Google+Chrome+202%20(1).png?raw=true" style="width: 100%; display: inline-block;" data-target="animated-image.originalImage"><br>
 <img align="center" alt="Coding" src="https://github.com/sonyfrid/image/blob/main/%D0%A1%D0%BA%D1%80%D0%B8%D0%BD%D1%88%D0%BE%D1%82-11-10-2023%2013_28_28.png?raw=true" style="width: 100%; display: inline-block;" data-target="animated-image.originalImage"><br>
 
