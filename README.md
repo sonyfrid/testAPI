@@ -1,8 +1,8 @@
 # testAPI
 How to start:
-<p> ```1. Save repository files```</p>
-<p>```2. Export to postman```</p>
-<p>```3. Done```</p>
+```1. Save repository files```<br>
+```2. Export to postman```<br>
+```3. Done```
 
 <API testing with swagger at https://send-request.me/
 
