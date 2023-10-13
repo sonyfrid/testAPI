@@ -12,5 +12,5 @@ https://send-request.me/
 
 <img align="center" alt="Coding" src="https://github.com/sonyfrid/image/blob/main/1.png?raw=true" style="width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
-2.
-<img align="center" alt="Coding" src="https://github.com/sonyfrid/image/blob/main/1.png?raw=true" style="width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<h4>2. Here we see an endpoint check with query parameters. Below is a visualization of the response body.</h4> 
+<img align="center" alt="Coding" src="https://github.com/sonyfrid/image/blob/main/3.png?raw=true" style="width: 100%; display: inline-block;" data-target="animated-image.originalImage">
