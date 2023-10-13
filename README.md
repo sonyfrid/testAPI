@@ -6,7 +6,8 @@ How to start:
 ```3. Done```
 
 API testing with swagger at
-https://send-request.me/ <br>
+https://send-request.me/
+<p></p>
 Below are examples of queries in Postman
 
 <h3>1. For ease of testing, JSON schemas are pre-written here.</h3> 
